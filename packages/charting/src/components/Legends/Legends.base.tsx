@@ -25,6 +25,7 @@ export interface ILegendState {
   selectedLegend: string;
   selectedState: boolean;
   hoverState: boolean;
+  isOverflowLinkClicked: boolean;
 }
 export class LegendsBase extends React.Component<ILegendsProps, ILegendState> {
   private _classNames: IProcessedStyleSet<ILegendsStyles>;
@@ -34,7 +35,8 @@ export class LegendsBase extends React.Component<ILegendsProps, ILegendState> {
     this.state = {
       selectedLegend: 'none',
       selectedState: false,
-      hoverState: false
+      hoverState: false,
+      isOverflowLinkClicked: false
     };
   }
 
@@ -146,10 +148,31 @@ export class LegendsBase extends React.Component<ILegendsProps, ILegendState> {
       className
     });
     return (
-      <HoverCard expandingCardProps={expandingCardProps}>
-        <div className={classNames.overflowIndicationTextStyle}>{items.length} more</div>
+      <HoverCard
+        expandingCardProps={expandingCardProps}
+        sticky={this.state.isOverflowLinkClicked}
+        trapFocus={this.state.isOverflowLinkClicked}
+        cardOpenDelay={10}
+        onMouseLeave={this._flickOffHoverCard}
+      >
+        <div className={classNames.overflowIndicationTextStyle} onClick={this._stickHoverCard}>
+          {items.length} more
+        </div>
       </HoverCard>
     );
+  };
+
+  private _stickHoverCard = () => {
+    const currentState = this.state.isOverflowLinkClicked;
+    this.setState({
+      isOverflowLinkClicked: !currentState
+    });
+  };
+
+  private _flickOffHoverCard = () => {
+    this.setState({
+      isOverflowLinkClicked: false
+    });
   };
 
   private _onHoverOverLegend = (legend: ILegend) => {
@@ -198,13 +221,7 @@ export class LegendsBase extends React.Component<ILegendsProps, ILegendState> {
       this._onLeave(legend);
     };
     return (
-      <div
-        key={index}
-        className={classNames.legend}
-        onClick={onClickHandler}
-        onMouseOver={onHoverHandler}
-        onMouseOut={onMouseOut}
-      >
+      <div key={index} className={classNames.legend} onClick={onClickHandler} onMouseOver={onHoverHandler} onMouseOut={onMouseOut}>
         <div className={classNames.rect} />
         <div className={classNames.text}>{legend.title}</div>
       </div>
