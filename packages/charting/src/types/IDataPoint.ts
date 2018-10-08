@@ -53,15 +53,31 @@ export interface IChartDataPoint {
   color?: string;
 }
 
+export interface ILineChartDataPoint {
+  /**
+   * Independent value of the data point, rendered along the x-axis.
+   * If x is a number, then each y-coordinate is plotted at its x-coordinate.
+   * If x is a string, then the data is evenly spaced along the x-axis.
+   */
+  x: number | Date;
+
+  /**
+   * Dependent value of the data point, rendered along the y-axis.
+   */
+  y: number;
+}
+
 export interface ILineChartPoints {
   /**
    * Legend text for the datapoint in the chart
    */
   legend: string;
+
   /**
    * data the datapoint in the chart
    */
-  data: IDataPoint[];
+  data: ILineChartDataPoint[];
+
   /**
    * color for the legend in the chart
    */

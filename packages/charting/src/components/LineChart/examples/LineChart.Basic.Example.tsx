@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { LineChart, ILineChartProps } from '@uifabric/charting/lib/LineChart';
+import { LineChart, ILineChartProps, ILineChartDataPoint } from '../index';
 import { IChartProps, ILineChartPoints } from '@uifabric/charting';
 import { DefaultPalette } from 'office-ui-fabric-react/lib/Styling';
 import { mergeStyles } from 'office-ui-fabric-react/lib/Styling';
@@ -19,21 +19,11 @@ export class LineChartBasicExample extends React.Component<ILineChartProps, {}> 
   }
 
   private _basicExample(): JSX.Element {
+    const date = new Date('10/31/2018');
+    console.log('date: ', date);
     const points: ILineChartPoints[] = [
       {
-        data: [
-          { x: 0, y: 10 },
-          { x: 5, y: 18 },
-          { x: 10, y: 24 },
-          { x: 15, y: 25 },
-          { x: 20, y: 15 },
-          { x: 25, y: 30 },
-          { x: 30, y: 18 },
-          { x: 35, y: 32 },
-          { x: 40, y: 29 },
-          { x: 45, y: 43 },
-          { x: 50, y: 46 }
-        ],
+        data: [{ x: new Date(2018, 9, 4), y: 10 }, { x: new Date(2018, 10, 2), y: 18 }],
         legend: 'First',
         color: DefaultPalette.blue
       }
@@ -45,7 +35,7 @@ export class LineChartBasicExample extends React.Component<ILineChartProps, {}> 
     const rootStyle: IRootStyles = { width: '700px', height: '300px' };
     return (
       <div className={mergeStyles(rootStyle)}>
-        <LineChart data={data} />
+        <LineChart data={data} startDate={new Date(2018, 9, 4)} endDate={new Date(2018, 10, 2)} />
       </div>
     );
   }

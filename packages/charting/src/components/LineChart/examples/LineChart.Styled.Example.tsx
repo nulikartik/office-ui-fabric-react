@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { LineChart, ILineChartProps } from '@uifabric/charting/lib/LineChart';
+import { LineChart, ILineChartProps } from '../index';
 import { IChartProps, ILineChartPoints } from '@uifabric/charting';
 import { DefaultPalette } from 'office-ui-fabric-react/lib/Styling';
 import { mergeStyles } from 'office-ui-fabric-react/lib/Styling';
@@ -22,16 +22,12 @@ export class LineChartStyledExample extends React.Component<ILineChartProps, {}>
     const points: ILineChartPoints[] = [
       {
         data: [
-          { x: 'One', y: 5 },
-          { x: 'Two', y: 10 },
-          { x: 'Three', y: 5 },
-          { x: 'Four', y: 20 },
-          { x: 'Five', y: 18 },
-          { x: 'Six', y: 5 },
-          { x: 'Seven', y: 10 },
-          { x: 'Eight', y: 5 },
-          { x: 'Nine', y: 20 },
-          { x: 'Ten', y: 18 }
+          { x: new Date(2018, 9, 4, 10), y: 10 },
+          { x: new Date(2018, 9, 4, 12), y: 18 },
+          { x: new Date(2018, 9, 4, 14), y: 24 },
+          { x: new Date(2018, 9, 4, 16), y: 35 },
+          { x: new Date(2018, 9, 4, 18), y: 35 },
+          { x: new Date(2018, 9, 4, 20), y: 38 }
         ],
         legend: 'Week',
         color: DefaultPalette.blue
@@ -43,9 +39,34 @@ export class LineChartStyledExample extends React.Component<ILineChartProps, {}>
       lineChartData: points
     };
     const rootStyle: IRootStyles = { width: '700px', height: '300px' };
+
+    const points1: ILineChartPoints[] = [
+      {
+        data: [
+          { x: new Date(2018, 9, 4, 10), y: 10 },
+          { x: new Date(2018, 9, 5, 12), y: 18 },
+          { x: new Date(2018, 9, 6, 14), y: 24 },
+          { x: new Date(2018, 9, 7, 16), y: 35 },
+          { x: new Date(2018, 9, 8, 18), y: 35 },
+          { x: new Date(2018, 9, 11, 0), y: 38 }
+        ],
+        legend: 'Week',
+        color: DefaultPalette.blue
+      }
+    ];
+
+    const data1: IChartProps = {
+      chartTitle: 'Line Chart',
+      lineChartData: points1
+    };
     return (
-      <div className={mergeStyles(rootStyle)}>
-        <LineChart data={data} strokeWidth={4} />
+      <div>
+        <div className={mergeStyles(rootStyle)}>
+          <LineChart data={data} strokeWidth={4} startDate={new Date(2018, 9, 4)} endDate={new Date(2018, 9, 5)} />
+        </div>
+        <div className={mergeStyles(rootStyle)}>
+          <LineChart data={data1} strokeWidth={4} startDate={new Date(2018, 9, 4)} endDate={new Date(2018, 9, 15)} />
+        </div>
       </div>
     );
   }

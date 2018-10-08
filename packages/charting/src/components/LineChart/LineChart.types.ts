@@ -2,7 +2,7 @@ import { ITheme, IStyle } from 'office-ui-fabric-react/lib/Styling';
 import { IStyleFunctionOrObject } from 'office-ui-fabric-react/lib/Utilities';
 import { IChartProps } from '../../types/IDataPoint';
 
-export { IChartProps, IDataPoint, ILineChartPoints } from '../../types/IDataPoint';
+export { IChartProps, IDataPoint, ILineChartDataPoint, ILineChartPoints } from '../../types/IDataPoint';
 
 export interface ILineChart {}
 
@@ -41,6 +41,16 @@ export interface ILineChartProps {
    * Width of line stroke
    */
   strokeWidth?: number;
+
+  /**
+   * The scale on xAxis will start from the date passed to this prop
+   */
+  startDate?: Date;
+
+  /**
+   * The scale on xAxis will end at the date passed to this prop
+   */
+  endDate?: Date;
 }
 
 export interface ILineChartStyleProps {
