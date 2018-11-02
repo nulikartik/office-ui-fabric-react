@@ -95,13 +95,6 @@ export class Chart extends React.Component<IChartInternalProps, { _width: number
           </div>
         );
       }
-      case ChartType.PieChart: {
-        return (
-          <div className={mergeStyles({ width: 300, height: 250 })}>
-            <DonutChart data={this.props.chartData![0]} innerRadius={0} />
-          </div>
-        );
-      }
       case ChartType.StackedBarChart: {
         return this._getStackedBarChart();
       }

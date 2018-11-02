@@ -55,21 +55,19 @@ export class DonutChartExample extends React.Component<{}, { loading: boolean }>
       chartData: firstChartData
     };
 
-    const chartContent2: IChartProps = {
-      chartType: ChartType.PieChart,
-      chartData: secondChartData
-    };
-
     const contentAreaList: ICardContentDetails[] = [
       {
         priority: Priority.Priority1,
-        cardContentType: CardContentType.Chart,
-        content: chartContent1
+        cardContentType: CardContentType.BodyText,
+        content: {
+          subHeaderText: 'Subheader Text',
+          bodyText: 'Body Text'
+        }
       },
       {
         priority: Priority.Priority2,
         cardContentType: CardContentType.Chart,
-        content: chartContent2
+        content: chartContent1
       }
     ];
     const that = this;
@@ -80,13 +78,16 @@ export class DonutChartExample extends React.Component<{}, { loading: boolean }>
       headerText: 'Donut Chart and Pie chart '
     };
     return (
-      <Card
-        cardFrameContent={cardFrameContent}
-        header={header}
-        cardContentList={contentAreaList}
-        cardSize={CardSize.large}
-        loading={this.state.loading}
-      />
+      // tslint:disable-next-line:jsx-ban-props
+      <div style={{ width: '600px', height: '600px', border: '1px solid #c0c1c4' }}>
+        <Card
+          cardFrameContent={cardFrameContent}
+          header={header}
+          cardContentList={contentAreaList}
+          cardSize={CardSize.large}
+          loading={this.state.loading}
+        />
+      </div>
     );
   }
 }

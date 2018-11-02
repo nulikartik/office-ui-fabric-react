@@ -3,7 +3,6 @@ import { IStyle } from 'office-ui-fabric-react/lib/Styling';
 
 export enum ChartType {
   DonutChart,
-  PieChart,
   StackedBarChart,
   VerticalBarChart,
   LineChart,

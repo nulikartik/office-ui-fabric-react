@@ -247,9 +247,6 @@ export class Layout extends React.Component<ILayoutProps, { _width: number; _hei
       case ChartType.LineChart: {
         return <LineChart />;
       }
-      case ChartType.PieChart: {
-        return <DonutChart />;
-      }
       case ChartType.StackedBarChart: {
         return <HorizontalBarGraph />;
       }
